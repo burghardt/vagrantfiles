@@ -1,0 +1,22 @@
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+    config.vm.box = "ubuntu/wily64"
+    config.vm.network "public_network", bridge: 'wlan0'
+
+    config.ssh.forward_agent = false
+    config.ssh.forward_x11 = false
+
+    config.vm.provider "virtualbox"
+    config.vm.provider :virtualbox do |vbox|
+        vbox.gui = true
+    end
+
+    config.vm.provision "shell", inline: <<-SHELL
+        apt-get update
+        apt-get install -y virtualbox-guest-dkms virtualbox-guest-utils virtualbox-guest-x11
+        apt-get install -y tmux zsh vim
+        apt-get install -y mate-desktop-environment slim xorg
+        service slim start
+    SHELL
+end
