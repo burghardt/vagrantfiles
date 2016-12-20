@@ -1,0 +1,25 @@
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+    config.vm.box = "ubuntu/trusty64"
+    config.vm.network "public_network", bridge: 'wlan0'
+
+    config.vm.synced_folder ".", "/vagrant", disabled: true
+    config.vm.synced_folder "/home/kb/Dropbox/Filmy", "/var/lib/minidlna", :mount_options => ["ro"]
+
+    config.ssh.forward_agent = false
+    config.ssh.forward_x11 = false
+
+    config.vm.provider "virtualbox"
+    config.vm.provider :virtualbox do |vbox|
+        vbox.gui = true
+    end
+
+    config.vm.provision "shell", inline: <<-SHELL
+        apt-get update
+        apt-get install -y virtualbox-guest-dkms virtualbox-guest-utils virtualbox-guest-x11
+        apt-get install -y language-pack-pl
+        apt-get install -y tmux zsh vim
+        apt-get install -y minidlna
+    SHELL
+end
