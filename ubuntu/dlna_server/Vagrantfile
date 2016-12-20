@@ -4,7 +4,7 @@ VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.box = "ubuntu/trusty64"
-    config.vm.hostname = "dlna_server"
+    config.vm.hostname = "dlna-server"
     config.vm.define "dlna_server" do |dlna_server|
     end
 

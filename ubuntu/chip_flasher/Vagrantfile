@@ -4,7 +4,7 @@ VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.box = "ubuntu/wily64"
-    config.vm.hostname = "chip_flasher"
+    config.vm.hostname = "chip-flasher"
     config.vm.define "chip_flasher" do |chip_flasher|
     end
 
