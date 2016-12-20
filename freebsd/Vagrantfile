@@ -25,6 +25,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
 
     config.vm.provision "shell", inline: <<-SHELL
+        set -eux
         env ASSUME_ALWAYS_YES=YES pkg bootstrap
         env ASSUME_ALWAYS_YES=YES pkg update -f
         pkg install -y xorg-server xinit xauth xscreensaver xf86-input-keyboard xf86-input-mouse
