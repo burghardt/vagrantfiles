@@ -12,7 +12,16 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     config.vm.provider "virtualbox"
     config.vm.provider :virtualbox do |vbox|
-        vbox.gui = true
+        vbox.customize ["modifyvm", :id, "--memory", "1024"]
+        vbox.customize ["modifyvm", :id, "--ioapic", "on"]
+        vbox.customize ["modifyvm", :id, "--cpus", "2"]
+        vbox.customize ["modifyvm", :id, "--cpuexecutioncap", "90"]
+        vbox.customize ["modifyvm", :id, "--hwvirtex", "on"]
+        vbox.customize ["modifyvm", :id, "--pae", "on"]
+        vbox.customize ["modifyvm", :id, "--audio", "none"]
+        vbox.customize ["modifyvm", :id, "--nictype1", "virtio"]
+        vbox.customize ["modifyvm", :id, "--nictype2", "virtio"]
+        vbox.linked_clone = true if Vagrant::VERSION =~ /^1.8/
     end
 
     config.vm.provision "shell", inline: <<-SHELL
