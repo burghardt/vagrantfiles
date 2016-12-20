@@ -5,6 +5,9 @@ VAGRANTFILE_API_VERSION = "2"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.guest = :freebsd
     config.vm.box = "freebsd/FreeBSD-10.2-RELEASE"
+    config.vm.hostname = "freebsd"
+    config.vm.define "freebsd" do |freebsd|
+    end
 
     config.vm.base_mac = "0A306032060E"
     config.vm.network "private_network", ip: "10.0.1.10"
@@ -18,6 +21,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.provider "virtualbox"
     config.vm.provider :virtualbox do |vbox|
         vbox.gui = true
+        vbox.name = "freebsd"
         vbox.customize ["modifyvm", :id, "--memory", "1024"]
         vbox.customize ["modifyvm", :id, "--ioapic", "on"]
         vbox.customize ["modifyvm", :id, "--cpus", "2"]
