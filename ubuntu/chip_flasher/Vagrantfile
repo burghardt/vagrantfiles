@@ -24,6 +24,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.provision "shell", inline: <<-SHELL
         apt-get update
         apt-get install -y virtualbox-guest-dkms virtualbox-guest-utils virtualbox-guest-x11
+        apt-get install -y language-pack-pl
         apt-get install -y mate-desktop-environment slim xorg
         apt-get install -y chromium-browser
         usermod -a -G dialout vagrant
